@@ -9,7 +9,7 @@ pipeline {
                 cd spring-framework-petclinic
                 ./mvnw
                 rm -f /home/tomcat10/apache-tomcat-10.1.13/webapps/petclinic.war
-                cp target/petclinic.war /home/tomcat10/apache-tomcat-10.1.13/webapps 
+                cp target/petclinic.war /home/tomcat/apache-tomcat-10.1.13/webapps/
                '''
             }
         }
