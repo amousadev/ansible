@@ -7,7 +7,7 @@ pipeline {
                 rm -rf spring-framework-petclinic
                 git clone https://github.com/spring-petclinic/spring-framework-petclinic.git
                 cd spring-framework-petclinic
-                ./mvnw target/spring-framework-petclinic.war /home/tomcat10/apache-tomcat-10.1.13/webapps
+                ./mvnw
                 rm -f /home/tomcat10/apache-tomcat-10.1.13/webapps/spring-framework-petclinic.war
                 cp target/spring-framework-petclinic.war /home/tomcat10/apache-tomcat-10.1.13/webapps 
                '''
