@@ -1,0 +1,15 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                sh '''
+                rm -rf spring-framework-petclinic
+                git clone https://github.com/spring-petclinic/spring-framework-petclinic.git
+                cd spring-framework-petclinic
+                ./mvnw
+               '''
+            }
+        }
+    }
+}
