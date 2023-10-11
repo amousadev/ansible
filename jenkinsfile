@@ -8,8 +8,8 @@ pipeline {
                 git clone https://github.com/spring-petclinic/spring-framework-petclinic.git
                 cd spring-framework-petclinic
                 ./mvnw
-                rm -f /home/tomcat10/apache-tomcat-10.1.13/webapps/spring-framework-petclinic.war
-                cp target/spring-framework-petclinic.war /home/tomcat10/apache-tomcat-10.1.13/webapps 
+                rm -f /home/tomcat10/apache-tomcat-10.1.13/webapps/petclinic.war
+                cp target/petclinic.war /home/tomcat10/apache-tomcat-10.1.13/webapps 
                '''
             }
         }
