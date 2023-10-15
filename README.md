@@ -49,7 +49,7 @@ ONBOOT="yes"
 - **edit hosts file:**
  - edit `/etc/hosts` file on the control node to include hostname of the managed node bu adding below line:
 
-      192.168.1.108 app04
+      ```192.168.1.108 app04```
 - create file called `inv` for anible invntory to include app04 host :
         
         [webservers]
