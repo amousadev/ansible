@@ -1,0 +1,58 @@
+---
+# tasks file for installSoftware
+- name: ceate tomcat user
+  user:
+    name: tomcat
+    password: "{{ tomcatPass | password_hash('sha512') }}"
+- name: copy sources folder
+  copy:
+    src: /home/ansible/sources
+    dest: /home/ansible/
+    
+- name: execute installJava script for tomcat
+  script:
+    chdir: /home/ansible/
+    cmd: /home/ansible/scripts/installJava.sh tomcat
+   
+- name: install tomcat
+  shell: |
+    mkdir -p /opt/tomcat8
+    tar -zxvf /home/ansible/sources/apache-tomcat-8.5.93.tar.gz -C /opt/tomcat8
+    chown -R tomcat /opt/tomcat8
+    chgrp -R tomcat /opt/tomcat8
+
+- name: open firewall ports for tomcat
+  shell: |
+    firewall-cmd --permanent --add-port="{{item}}"/tcp
+    firewall-cmd --reload
+  with_items:
+    - "{{tomcatHTTPport}}"
+    - "{{tomcatJMXport}}"
+    - "{{tomcatRMIport}}"
+- name: copy jenkins WAR file to tomcat webapps directory
+  copy:
+    src: /home/ansible/sources/jenkins.war
+    dest: /opt/tomcat8/apache-tomcat-8.5.93/webapps
+    
+- name: ceate nagios user
+  user:
+    name: nagios
+    password: "{{ nagiosPass | password_hash('sha512') }}"
+    
+- name: install nagios
+  shell: |
+    mkdir -p /opt/nagios
+    tar -zxvf /home/ansible/sources/xi-5.11.2.tar.gz -C /opt/nagios
+    chown -R nagios /opt/nagios
+    chgrp -R nagios /opt/nagios
+- name: install pexpect
+  pip:
+    name: pexpect
+  become: yes
+- name: fullinstall
+  expect:
+    chdir: /opt/nagios/nagiosxi
+    command: /opt/nagios/nagiosxi/fullinstall -f
+    timeout: null
+    responses:
+       'Do you want to continue\? \[Y\/n\]' : 'Y'

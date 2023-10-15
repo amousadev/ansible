@@ -1,0 +1,6 @@
+---
+# tasks file for configureNagios
+- name: configure nagios to monitor tomcat using nagios API
+  script:
+    chdir: /home/nagios
+    cmd: /home/ansible/configureNagios/files/createTomcatMonitoringService.sh

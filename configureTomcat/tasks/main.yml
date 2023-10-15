@@ -1,0 +1,62 @@
+---
+# tasks file for configureTomcat
+- name: change tomcat ports
+  xml:
+    path: /opt/tomcat8/apache-tomcat-8.5.93/conf/server.xml
+    xpath: /Server/Service/Connector
+    attribute: port
+    value: "9090"
+
+- name: change manager app conext to allow IP range
+  xml:
+    path: /opt/tomcat8/apache-tomcat-8.5.93/webapps/manager/META-INF/context.xml
+    xpath: /Context/Valve
+    attribute: allow
+    value: ".*"
+    
+- name: increase cach size
+  lineinfile:
+    path: /opt/tomcat8/apache-tomcat-8.5.93/conf/context.xml
+    insertafter: "<Context>"
+    line: "<Resources cachingAllowed=\"true\" cacheMaxSize=\"100000\"/>"
+
+- name: modify tomcat users file
+  lineinfile:
+    path: /opt/tomcat8/apache-tomcat-8.5.93/conf/tomcat-users.xml
+    insertbefore: "</tomcat-users>"
+    line: "{{item}}"
+  with_items:
+    - "  <role rolename=\"manager-gui\"/>"
+    - "  <user username=\"tomcat\" password=\"{{tomcatPass}}\" roles=\"manager-gui\"/>"
+    
+- name: ceate aliases for tomcat commands
+  lineinfile:
+    path: /home/tomcat/.bashrc
+    insertafter: "# User specific aliases and functions"
+    line: "{{item}}"
+  with_items:
+    - "alias start-tomcat=\"/opt/tomcat8/apache-tomcat-8.5.93/bin/startup.sh\""
+    - "alias stop-tomcat=\"/opt/tomcat8/apache-tomcat-8.5.93/bin/shutdown.sh\""
+    - "alias tomcat-log=\"tail -100 /opt/tomcat8/apache-tomcat-8.5.93/logs/catalina.2023-10-09.log\""
+    - "alias tomcat-conf=\"cd /opt/tomcat8/apache-tomcat-8.5.93/conf\""
+
+- name: reload bashrc file
+  shell: | 
+    source /home/tomcat/.bashrc
+- name: configure JMX and RMI for nagios monitor
+  copy:
+    src: setenv.sh
+    dest: /opt/tomcat8/apache-tomcat-8.5.93/bin/
+    owner: tomcat
+    mode: 0755
+
+- name: restart tomcat
+  shell: |
+    source /home/tomcat/.bashrc
+    source /home/tomcat/.bash_profile
+    /opt/tomcat8/apache-tomcat-8.5.93/bin/startup.sh
+- name: restart tomcat
+  shell: |
+    source /home/tomcat/.bashrc
+    source /home/tomcat/.bash_profile
+    /opt/tomcat8/apache-tomcat-8.5.93/bin/startup.sh
