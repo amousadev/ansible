@@ -30,7 +30,8 @@ IPV6_ADDR_GEN_MODE="stable-privacy"
 NAME="enp0s3"
 UUID="e03b946e-8119-4138-b947-456cadf377d1"
 DEVICE="enp0s3"
-ONBOOT="yes"```
+ONBOOT="yes"
+```
   - apply the configuration by restarting network using command: ` systemctl restart network`
   - test conncetivity using `ping` command
 
