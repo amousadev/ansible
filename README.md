@@ -35,12 +35,12 @@ ONBOOT="yes"
   - apply the configuration by restarting network using command: ` systemctl restart network`
   - test conncetivity using `ping` command
 
-- **Install ansible**:
+- **Install ansible:**
   - login as root user on centos
   - install epel-release repo using command:  `yum install epel-release`
   - install ansible using command: `yum install ansible`
   
-- **Setup SSH key authentication between control node and managed node**:
+- **Setup SSH key authentication between control node and managed node:**
   1. login as ansible user to the control node machine and issue the following commands:
     - `ssh-keygen -t rsa`
     - `ssh-copy-id app04`
