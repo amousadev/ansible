@@ -8,7 +8,7 @@
   - `hostnamectl set-hostname control`
   
   - `hostnamectl set-hostname app04` 
-- ** setup network connectivity between the control node and the managed node **:
+- setup network connectivity between the control node and the managed node:
   1. login as the root user
   - edit the configuration files located under `/etc/sysconfig/network-scripts/ifcfg-enp0s3` in both machine to be like the below for both machines and assign different IP addresses for both.
 ```
