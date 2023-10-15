@@ -1,4 +1,4 @@
-### install and configure tomcat 8.5 , nagiosXI 5.11 and jenkins via ansible on centos
+### this repo explains how to install tomcat 8.5 , nagiosXI 5.11 and jenkins via ansible on centos and also configure tomcat for NAgios XI monitoring using Nagios XI API
 ##### infrastructure needed:
 - two linux servers running centos 7, either VMs or physical, connected to the same network , one will be used as ansible control node and the other will be used as a managed node machine.
 
