@@ -1,0 +1,13 @@
+---
+# tasks file for configureNagios
+- name: copy script file
+  copy:
+    src: /home/ansible/scripts/createTomcatMonitoringService.sh
+    dest: /home/nagios/createTomcatMonitoringService.sh
+    owner: nagios
+    group: nagios
+    mode: 0755
+
+- name: create monitoring service for tomcat
+  shell:
+    /home/nagios/createTomcatMonitoringService.sh
