@@ -1,3 +1,0 @@
----
-# vars file for configureNagios
-ansible_become_pass: helper123

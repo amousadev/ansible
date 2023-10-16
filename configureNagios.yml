@@ -1,6 +1,0 @@
-- hosts: app04
-  become: true
-  become_method: su
-  become_user: nagios
-  roles:
-    - configureNagios
