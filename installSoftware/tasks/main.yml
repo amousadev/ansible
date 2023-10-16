@@ -49,25 +49,25 @@
     group: tomcat
     mode: 0755
     
-#- name: ceate nagios user
-#  user:
-#    name: nagios
-#    password: "{{ nagiosPass | password_hash('sha512') }}"
-#    
-#- name: install nagios
-#  shell: |
-#    mkdir -p /opt/nagios
-#    tar -zxvf /home/ansible/sources/xi-5.11.2.tar.gz -C /opt/nagios
-#    chown -R nagios /opt/nagios
-#    chgrp -R nagios /opt/nagios
-#- name: install pexpect
-#  pip:
-#    name: pexpect
-#  become: yes
-#- name: fullinstall
-#  expect:
-#    chdir: /opt/nagios/nagiosxi
-#    command: /opt/nagios/nagiosxi/fullinstall -f
-#    timeout: null
-#    responses:
-#       'Do you want to continue\? \[Y\/n\]' : 'Y'
+- name: ceate nagios user
+  user:
+    name: nagios
+    password: "{{ nagiosPass | password_hash('sha512') }}"
+    
+- name: install nagios
+  shell: |
+    mkdir -p /opt/nagios
+    tar -zxvf /home/ansible/sources/xi-5.11.2.tar.gz -C /opt/nagios
+    chown -R nagios /opt/nagios
+    chgrp -R nagios /opt/nagios
+- name: install pexpect
+  pip:
+    name: pexpect
+  become: yes
+- name: fullinstall
+  expect:
+    chdir: /opt/nagios/nagiosxi
+    command: /opt/nagios/nagiosxi/fullinstall -f
+    timeout: null
+    responses:
+       'Do you want to continue\? \[Y\/n\]' : 'Y'
