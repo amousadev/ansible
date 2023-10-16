@@ -7,6 +7,7 @@ pipeline {
                 rm -rf pet-clinic-war
                 git clone https://github.com/Azure-Samples/pet-clinic-war.git
                 cd pet-clinic-war
+                chmod +x mvnw
                 ./mvnw package
                 cp target/spring-petclinic-2.3.1.BUILD-SNAPSHOT.war /opt/tomcat8/apache-tomcat-8.5.93/webapps/
                '''
