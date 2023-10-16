@@ -4,12 +4,11 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
-                rm -rf spring-framework-petclinic
-                git clone https://github.com/spring-petclinic/spring-framework-petclinic.git
-                cd spring-framework-petclinic
-                ./mvnw
-                rm -f /opt/tomcat10/apache-tomcat-10.1.13/webapps/petclinic.war
-                cp target/petclinic.war /opt/tomcat10/apache-tomcat-10.1.13/webapps/
+                rm -rf pet-clinic-war
+                git clone https://github.com/Azure-Samples/pet-clinic-war.git
+                cd pet-clinic-war
+                ./mvnw package
+                cp target/spring-petclinic-2.3.1.BUILD-SNAPSHOT.war /opt/tomcat8/apache-tomcat-8.5.93/webapps/
                '''
             }
         }
